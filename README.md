@@ -2,6 +2,7 @@
 
 Leadership operating review of outstanding balances as of 26 August 2026.
 
-Open [index.html](index.html) — Start briefing / Next / arrow keys.
+**Open this (renders in the browser):**
+https://raw.githack.com/vinniecurcie1/oc-solar-finance-briefing/main/index.html
 
-Live view: https://htmlpreview.github.io/?https://github.com/vinniecurcie1/oc-solar-finance-briefing/blob/main/index.html
+Start briefing / Next / arrow keys. Source: live Nexus + QuickBooks invoice.balance.
