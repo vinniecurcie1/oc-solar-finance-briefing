@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>OC Solar Finance Briefing — 26 August 2026</title>
+<style>
+  :root {
+    --navy:#0c1522; --navy2:#142033; --navy3:#1b2d45;
+    --ink:#e8e4db; --muted:#9aa3b0; --gold:#c4a35a; --gold2:#e8c872;
+    --collect:#e0b84c; --funding:#5b8fb3; --dispute:#c45c5c; --fresh:#7d9a7a;
+    --line:rgba(232,228,219,.1);
+  }
+  * { box-sizing: border-box; }
+  html, body { height:100%; margin:0; background:var(--navy); color:var(--ink);
+    font-family:"IBM Plex Sans", ui-sans-serif, system-ui, sans-serif; }
+  button, a.btn { cursor:pointer; }
+  .deck { display:flex; flex-direction:column; height:100%; }
+  header.bar, footer.bar {
+    display:flex; align-items:center; gap:12px;
+    padding:8px 16px; border-color:var(--line); border-style:solid; flex-shrink:0;
+  }
+  header.bar { border-width:0 0 1px; justify-content:space-between; }
+  footer.bar { border-width:1px 0 0; padding-right:24px; }
+  .kicker { font-size:11px; font-weight:600; letter-spacing:.16em; color:var(--gold); text-transform:uppercase; }
+  .muted { color:var(--muted); font-size:13px; }
+  .stage { flex:1; min-height:0; overflow:auto; padding:28px 36px 36px; position:relative; }
+  .slide { display:none; max-width:1100px; margin:0 auto; }
+  .slide.on { display:block; }
+  h1,h2 { font-family:"IBM Plex Serif", Georgia, serif; font-weight:600; line-height:1.12; margin:.2em 0 .4em; }
+  h1 { font-size:clamp(28px,5vw,56px); }
+  h2 { font-size:clamp(22px,3.4vw,40px); }
+  .lede { color:var(--muted); max-width:720px; font-size:16px; line-height:1.5; }
+  .grid { display:grid; gap:12px; }
+  .g2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .g3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  .g4 { grid-template-columns:repeat(4,minmax(0,1fr)); }
+  @media (max-width:800px){ .g2,.g3,.g4 { grid-template-columns:1fr 1fr; } .stage{padding:16px;} }
+  @media (max-width:520px){ .g2,.g3,.g4 { grid-template-columns:1fr; } }
+  .card { background:var(--navy2); border-radius:14px; padding:16px 18px;
+    box-shadow:0 0 0 1px var(--line); }
+  .stat-l { font-size:10px; font-weight:600; letter-spacing:.14em; color:var(--muted); text-transform:uppercase; }
+  .stat-v { font-family:"IBM Plex Serif", Georgia, serif; font-size:28px; margin-top:4px; }
+  .gold { color:var(--collect); } .fund { color:var(--funding); } .dis { color:var(--dispute); } .fr { color:var(--fresh); }
+  .btn {
+    display:inline-flex; align-items:center; gap:6px; height:44px; padding:0 18px;
+    border-radius:999px; text-decoration:none; font-weight:600; font-size:14px; border:0;
+  }
+  .btn-gold { background:var(--gold); color:var(--navy); }
+  .btn-gold:hover { background:var(--gold2); }
+  .btn-ghost { background:transparent; color:var(--muted); }
+  .btn-ghost:hover { background:var(--navy3); color:var(--ink); }
+  .pill { border-radius:999px; padding:6px 12px; font-size:11px; color:var(--muted); text-decoration:none; }
+  .pill.on { background:rgba(196,163,90,.2); color:var(--gold); }
+  .progress { flex:1; height:4px; background:var(--navy3); border-radius:99px; overflow:hidden; }
+  .progress > i { display:block; height:100%; background:var(--gold); }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  th { text-align:left; color:var(--muted); font-size:11px; letter-spacing:.12em; text-transform:uppercase; padding:8px 10px; border-bottom:1px solid var(--line); }
+  td { padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .mono { font-family:ui-monospace, Menlo, monospace; font-size:12px; color:var(--gold); }
+  .bar { height:10px; background:var(--navy3); border-radius:99px; overflow:hidden; }
+  .bar > i { display:block; height:100%; background:var(--funding); }
+  .row { display:flex; justify-content:space-between; gap:12px; margin:8px 0 4px; font-size:13px; }
+  .navs { display:flex; gap:4px; flex-wrap:wrap; }
+  .struck { text-decoration:line-through; color:var(--dispute); font-family:"IBM Plex Serif",Georgia,serif; font-size:36px; }
+  a.link { color:var(--gold); }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div class="deck">
+  <header class="bar">
+    <div>
+      <div class="kicker">OC Solar Finance</div>
+      <div class="muted" id="pos">Frame · 1 / 24</div>
+    </div>
+    <nav class="navs" id="secs"></nav>
+  </header>
+  <div class="stage" id="stage">
+
+<section class="slide on" data-sec="Frame" data-label="Title">
+  <p class="kicker">26 August 2026 · Confidential</p>
+  <h1>The outstanding-balance briefing.</h1>
+  <p class="lede">What is billed, what is sitting at a financier, and what is simply not being worked — from live Nexus and QuickBooks, not the $111M Billing Management figure.</p>
+  <p><a class="btn btn-gold" href="#2">Start briefing →</a></p>
+  <div class="grid g4" style="margin-top:28px">
+    <div class="card"><div class="stat-l">True QBO AR</div><div class="stat-v gold">$3.14M</div><div class="muted">149 jobs</div></div>
+    <div class="card"><div class="stat-l">Collectible</div><div class="stat-v gold">$237k</div><div class="muted">17 cash / CC</div></div>
+    <div class="card"><div class="stat-l">Financier</div><div class="stat-v fund">$2.49M</div><div class="muted">79% of the book</div></div>
+    <div class="card"><div class="stat-l">Never billed closeouts</div><div class="stat-v dis">~$950k</div><div class="muted">24 completed jobs</div></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Frame" data-label="Agenda">
+  <p class="kicker">Agenda</p>
+  <h2>Six movements. One hour.</h2>
+  <p class="lede">Click any tile to jump.</p>
+  <div class="grid g3" style="margin-top:18px">
+    <a class="card" href="#3" style="color:inherit;text-decoration:none"><div class="mono">01 · Frame</div><div style="font-family:IBM Plex Serif,serif;font-size:22px;margin-top:8px">The real book</div><p class="muted">QBO AR is $3.14M. Only $237k is collectible cash.</p></a>
+    <a class="card" href="#4" style="color:inherit;text-decoration:none"><div class="mono">02 · The book</div><div style="font-family:IBM Plex Serif,serif;font-size:22px;margin-top:8px">Four buckets</div><p class="muted">Funding, unlabeled, cash, dispute.</p></a>
+    <a class="card" href="#7" style="color:inherit;text-decoration:none"><div class="mono">03 · Collections</div><div style="font-family:IBM Plex Serif,serif;font-size:22px;margin-top:8px">Cash that is actually late</div><p class="muted">$129k / 6 jobs. Prior is half of it.</p></a>
+    <a class="card" href="#10" style="color:inherit;text-decoration:none"><div class="mono">04 · Funding</div><div style="font-family:IBM Plex Serif,serif;font-size:22px;margin-top:8px">Financier AR is not collections</div><p class="muted">$2.49M. Portal work, not past-due letters.</p></a>
+    <a class="card" href="#15" style="color:inherit;text-decoration:none"><div class="mono">05 · Operations</div><div style="font-family:IBM Plex Serif,serif;font-size:22px;margin-top:8px">Why auto-invoice is dead</div><p class="muted">14% of ACTIVE jobs have a payment type.</p></a>
+    <a class="card" href="#21" style="color:inherit;text-decoration:none"><div class="mono">06 · Asks</div><div style="font-family:IBM Plex Serif,serif;font-size:22px;margin-top:8px">Twelve calls to action</div><p class="muted">Owners, dollars, due dates.</p></a>
+  </div>
+</section>
+
+<section class="slide" data-sec="Frame" data-label="Headline">
+  <p class="kicker">The headline</p>
+  <h2>This is not a $3 million collections problem.</h2>
+  <p class="lede">Live Nexus + QuickBooks invoice.balance. Matches Megan’s 13 Aug QBO KPI ($2.996M / 165) within one billing week.</p>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="grid g2">
+      <div class="card"><div class="stat-l">QuickBooks AR</div><div class="stat-v gold">$3,141,314</div><div class="muted">149 open-invoice jobs</div></div>
+      <div class="card"><div class="stat-l">Homeowner cash / CC</div><div class="stat-v gold">$237,135</div><div class="muted">17 jobs · 8% of AR</div></div>
+      <div class="card"><div class="stat-l">Financier invoices</div><div class="stat-v fund">$2,488,003</div><div class="muted">108 jobs · 79% of AR</div></div>
+      <div class="card"><div class="stat-l">Written-path disputes</div><div class="stat-v dis">$170,927</div><div class="muted">Oh, Davis, Donley, Hoch</div></div>
+    </div>
+    <div class="card">
+      <div class="kicker">What leadership should believe</div>
+      <ul class="muted" style="line-height:1.6">
+        <li><b style="color:var(--ink)">Megan’s scorecard is right.</b> $2.996M on 13 Aug vs $3.14M today.</li>
+        <li><b style="color:var(--ink)">Dunning the $3.14M would be malpractice.</b> 79% is financier invoices.</li>
+        <li><b style="color:var(--ink)">The cash book is small and stale.</b> $129k of $237k is already 90+ days. Prior is $73k of that.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-sec="The book" data-label="The split">
+  <p class="kicker">The book</p>
+  <h2>Four buckets.</h2>
+  <p class="lede">Every open QuickBooks invoice.balance, classified from the document name and payment method — not from Nexus Billing Management.</p>
+  <div class="grid g2" style="margin-top:18px">
+    <div class="card">
+      <svg viewBox="0 0 42 42" width="220" height="220" style="display:block;margin:8px auto">
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#0c1522" stroke-width="8"/>
+        <!-- 79% funding, 8% unlabeled, 7.5% collect, 5.4% dispute — approx dash -->
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#5b8fb3" stroke-width="8" stroke-dasharray="79 21" stroke-dashoffset="0" transform="rotate(-90 21 21)"/>
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#7d9a7a" stroke-width="8" stroke-dasharray="8 92" stroke-dashoffset="-79" transform="rotate(-90 21 21)"/>
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#e0b84c" stroke-width="8" stroke-dasharray="7.5 92.5" stroke-dashoffset="-87" transform="rotate(-90 21 21)"/>
+        <circle cx="21" cy="21" r="15.9" fill="none" stroke="#c45c5c" stroke-width="8" stroke-dasharray="5.5 94.5" stroke-dashoffset="-94.5" transform="rotate(-90 21 21)"/>
+        <text x="21" y="20" text-anchor="middle" fill="#e8e4db" font-size="5" font-family="Georgia">$3.14M</text>
+        <text x="21" y="25" text-anchor="middle" fill="#9aa3b0" font-size="2.6">open AR</text>
+      </svg>
+    </div>
+    <div>
+      <a class="card" href="#10" style="display:block;color:inherit;text-decoration:none;margin-bottom:8px"><b>Funding AR</b> <span class="fund" style="float:right">$2.49M</span><div class="muted">108 jobs · Financier. Do not dunn the homeowner.</div></a>
+      <a class="card" href="#9" style="display:block;color:inherit;text-decoration:none;margin-bottom:8px"><b>New unlabeled</b> <span class="fr" style="float:right">$245k</span><div class="muted">20 jobs · Tag before anyone calls.</div></a>
+      <a class="card" href="#7" style="display:block;color:inherit;text-decoration:none;margin-bottom:8px"><b>Collectible AR</b> <span class="gold" style="float:right">$237k</span><div class="muted">17 jobs · Homeowner cash / CC.</div></a>
+      <a class="card" href="#8" style="display:block;color:inherit;text-decoration:none"><b>Disputed AR</b> <span class="dis" style="float:right">$171k</span><div class="muted">4 jobs · Oh, Davis, Hoch, Donley. Off auto-dunning.</div></a>
+    </div>
+  </div>
+</section>
+
+<section class="slide" data-sec="The book" data-label="Poison numbers">
+  <p class="kicker">Do not cite</p>
+  <h2>Three numbers that will get us in trouble.</h2>
+  <div class="grid g3" style="margin-top:18px">
+    <div class="card"><div class="struck">$111.7M</div><p><b>Nexus Billing Management “open amount”</b></p><p class="muted">Copies total invoiced onto closed invoices. Includes paid history. Never cite this number.</p></div>
+    <div class="card"><div class="struck">$37M</div><p><b>Contract minus QBO paid</b></p><p class="muted">TPO/PPA funds outside the customer invoice. 221 completed LightReach jobs show $0 billed and are not homeowner AR.</p></div>
+    <div class="card"><div class="struck">$3.14M</div><p><b>Treating all QBO AR as collections</b></p><p class="muted">79% is financier invoices. Sending those customers past-due letters creates escalations like Jung Yup Oh.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="The book" data-label="Aging">
+  <p class="kicker">Aging</p>
+  <h2>The book is young. The cash is not.</h2>
+  <p class="lede">$1.34M is 0–29 days — mostly new financier invoices. The collections problem lives in 90+.</p>
+  <div class="card" style="margin-top:16px">
+    <div class="row"><span>0–29d · 50 jobs</span><b>$1.34M</b></div><div class="bar"><i style="width:100%"></i></div>
+    <div class="row"><span>30–59d · 35 jobs</span><b>$606k</b></div><div class="bar"><i style="width:45%;background:var(--funding)"></i></div>
+    <div class="row"><span>60–89d · 26 jobs</span><b>$332k</b></div><div class="bar"><i style="width:25%"></i></div>
+    <div class="row"><span>90–179d · 26 jobs</span><b>$461k</b></div><div class="bar"><i style="width:34%;background:var(--collect)"></i></div>
+    <div class="row"><span>180d+ · 10 jobs</span><b>$270k</b></div><div class="bar"><i style="width:20%;background:var(--dispute)"></i></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Collections" data-label="Collect 90+">
+  <p class="kicker">Collections</p>
+  <h2>Cash ≥90 days — $129k / 6 jobs.</h2>
+  <p class="lede">Prior is two invoices. One combined demand — not two letters.</p>
+  <table style="margin-top:12px">
+    <tr><th>Job</th><th>Customer</th><th>Open</th><th>Age</th><th>PM · note</th></tr>
+    <tr><td class="mono">PN-000205 / 204</td><td>Michael Prior</td><td>$73,149</td><td>90d</td><td class="muted">Alex Garcia · last pay 20 Nov 2025. One combined demand.</td></tr>
+    <tr><td class="mono">P-005852</td><td>Kevin Elliott-TSR</td><td>$25,469</td><td>169d</td><td class="muted">Alex Garcia · Confirm TSR remittance.</td></tr>
+    <tr><td class="mono">PN-000097</td><td>David Horowitz</td><td>$14,044</td><td>112d</td><td class="muted">Alex Garcia · Final-Cash 5 May.</td></tr>
+    <tr><td class="mono">P-005842</td><td>Adi Greenberg</td><td>$10,939</td><td>112d</td><td class="muted">Alex Garcia · Last payment more than a year ago.</td></tr>
+    <tr><td class="mono">PN-000687</td><td>Solomon Duressa</td><td>$5,320</td><td>131d</td><td class="muted">Alex Garcia · Final-Cash 16 Apr.</td></tr>
+  </table>
+</section>
+
+<section class="slide" data-sec="Collections" data-label="Collect 30+">
+  <p class="kicker">Collections</p>
+  <h2>Cash 30–89 days — $74k / 8 jobs.</h2>
+  <p class="lede">Ekholm is a work-hold, not a pay-hold, until Andrea confirms.</p>
+  <table style="margin-top:12px">
+    <tr><th>Job</th><th>Customer</th><th>Open</th><th>Age</th><th>Note</th></tr>
+    <tr><td class="mono">PN-001109</td><td>Patrik Ekholm</td><td>$27,108</td><td>70d</td><td class="muted">HOLD. Inspection / PTO. Andrea Ortiz.</td></tr>
+    <tr><td class="mono">PN-001612</td><td>Ross Duncan</td><td>$14,103</td><td>77d</td><td class="muted">Initial-Cash split. Unassigned.</td></tr>
+    <tr><td class="mono">P-006193</td><td>Ruben Palacios-TSR</td><td>$12,000</td><td>56d</td><td class="muted">TSR — Tesla remittance. Alex Garcia.</td></tr>
+    <tr><td class="mono">P-006124</td><td>Darren Bradbury</td><td>$9,539</td><td>36d</td><td class="muted">Final-Cash 20 Jul. Alex Garcia.</td></tr>
+    <tr><td class="mono">PN-001434</td><td>Lisa Reynolds</td><td>$3,710</td><td>63d</td><td class="muted">Final-Cash. Unassigned.</td></tr>
+    <tr><td class="mono">PN-000963</td><td>Joan Clasby</td><td>$3,309</td><td>35d</td><td class="muted">Final-Cash. Austin Fietsam.</td></tr>
+    <tr><td class="mono">PN-001826</td><td>Shawn Lameh</td><td>$1,922</td><td>40d</td><td class="muted">Initial-Cash. Unassigned.</td></tr>
+    <tr><td class="mono">PN-001174</td><td>Jaydeep Kar</td><td>$1,900</td><td>47d</td><td class="muted">Initial-Cash. Mike Gomez.</td></tr>
+  </table>
+</section>
+
+<section class="slide" data-sec="Collections" data-label="Disputes">
+  <p class="kicker">Disputes</p>
+  <h2>Four jobs. $171k. Written path this week.</h2>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><div class="mono">P-006285</div><b>Jung Yup Oh — $102,200</b><p class="muted">188d · Andrea Ortiz. SPAN remaining + battery RMA. OneEthos final 18 Feb. Stage still Pre-Construction. Off auto-dunning. Asked: Vinnie + Andrea.</p></div>
+    <div class="card"><div class="mono">PN-000464</div><b>Paul Davis — $38,784</b><p class="muted">259d · Andrea Ortiz. Islanded system + unpermitted work. HO agreed 18 Mar to permit. Not a letter — a stuck install.</p></div>
+    <div class="card"><div class="mono">P-006324</div><b>Edward Donley — $19,303</b><p class="muted">260d · Andrea Ortiz. Contested. Final-Cash 8 Dec 2025. Last pay over a year ago. Megan asked 17 Aug. Written status missing.</p></div>
+    <div class="card"><div class="mono">P-006305</div><b>Ben Hoch — $10,640</b><p class="muted">204d · Alex Garcia. Contested. Final-Cash 2 Feb 2026. Megan asked 17 Aug. Written status missing.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="The book" data-label="Unlabeled">
+  <p class="kicker">Unlabeled</p>
+  <h2>$245k / 20 jobs billed as “QuickBooks Invoice.”</h2>
+  <p class="lede">Classify as Cash or financier before Mario calls anyone. 87 of 149 open invoices still use a generic QBO doc name ($1.81M).</p>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><div class="stat-l">Named financier on QBO doc</div><div class="stat-v fund">$1.33M</div><div class="muted">62 jobs</div></div>
+    <div class="card"><div class="stat-l">Generic “QuickBooks Invoice”</div><div class="stat-v dis">$1.81M</div><div class="muted">87 jobs — tag the newest 20 this week</div></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Funding" data-label="Funding">
+  <p class="kicker">Funding</p>
+  <h2>$2.49M is a portal problem, not a collections problem.</h2>
+  <p class="lede">Do not send these homeowners past-due letters.</p>
+  <div class="card" style="margin-top:16px">
+    <div class="row"><span>LightReach · 29 jobs</span><b>$495k</b></div><div class="bar"><i style="width:100%"></i></div>
+    <div class="row"><span>Enfin · 18 jobs</span><b>$317k</b></div><div class="bar"><i style="width:64%"></i></div>
+    <div class="row"><span>Concert · 5 jobs</span><b>$173k</b></div><div class="bar"><i style="width:35%"></i></div>
+    <div class="row"><span>Wheelhouse · 5 jobs</span><b>$159k</b></div><div class="bar"><i style="width:32%"></i></div>
+    <div class="row"><span>OneEthos · 1 job</span><b>$102k</b></div><div class="bar"><i style="width:21%;background:var(--dispute)"></i></div>
+    <div class="row"><span>Goodleap · 4 jobs</span><b>$86k</b></div><div class="bar"><i style="width:17%"></i></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Funding" data-label="Funding 90+">
+  <p class="kicker">Funding 90+</p>
+  <h2>$432k / 26 jobs sitting at a financier.</h2>
+  <table style="margin-top:12px">
+    <tr><th>Job</th><th>Customer</th><th>Open</th><th>Age</th><th>Note</th></tr>
+    <tr><td class="mono">PN-000784</td><td>Eric Stotz</td><td>$89,535</td><td>110d</td><td class="muted">LightReach split-contract. Jake / Alex.</td></tr>
+    <tr><td class="mono">PN-001321</td><td>Kimberly Schwartz</td><td>$54,473</td><td>131d</td><td class="muted">LightReach. Unassigned.</td></tr>
+    <tr><td class="mono">P-006383</td><td>Derek Fujikawa</td><td>$44,462</td><td>139d</td><td class="muted">Photo / BUS return. Mike Gomez.</td></tr>
+    <tr><td class="mono">PN-000386</td><td>Jaime Carlos</td><td>$32,243</td><td>194d</td><td class="muted">Battery never installed. Austin.</td></tr>
+    <tr><td class="mono">PN-000701</td><td>Julia Vest</td><td>$20,951</td><td>188d</td><td class="muted">LADWP cutover. Andrea.</td></tr>
+    <tr><td class="mono">PN-000175</td><td>Paula Sandoval</td><td>$19,392</td><td>197d</td><td class="muted">Goodleap. Alex Garcia.</td></tr>
+  </table>
+</section>
+
+<section class="slide" data-sec="Funding" data-label="Clawbacks">
+  <p class="kicker">Clawbacks</p>
+  <h2>M1 clocks that can reverse funding.</h2>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><b>Eric Stotz</b> · $134k LR / $90k open<p class="muted">LightReach wants the job split into two contracts. Resign not done. Jake / Alex.</p></div>
+    <div class="card"><b>Derek Fujikawa</b> · M1 photos<p class="muted">PW wiring, comm, BUS. Return was 26 Aug. Alex / Mike.</p></div>
+    <div class="card"><b>Jaime Carlos</b> · battery never installed<p class="muted">Customer approved to proceed — need a date. Demand-letter candidate if they stall. Austin.</p></div>
+    <div class="card"><b>Julia Vest</b> · LADWP cutover 26 Aug<p class="muted">Incomplete electrical + Tesla monitoring. Andrea.</p></div>
+    <div class="card"><b>Eligio Mendoza</b> · Goodleap<p class="muted">Final failed. Under 20 days to M1 clawback. Alex.</p></div>
+    <div class="card"><b>Jose Moreno</b> · Goodleap<p class="muted">Inspection failed 13 Aug. Clawback clock running. Mike.</p></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Funding" data-label="Wheelhouse">
+  <p class="kicker">Wheelhouse</p>
+  <h2>38 Nexus flags. 28 true. 10 lies.</h2>
+  <div class="grid g3" style="margin-top:16px">
+    <div class="card"><div class="stat-l">Nexus flagged unfunded</div><div class="stat-v gold">38</div></div>
+    <div class="card"><div class="stat-l">True unfunded</div><div class="stat-v dis">28</div></div>
+    <div class="card"><div class="stat-l">Stale Nexus flags</div><div class="stat-v fr">10</div></div>
+  </div>
+  <p class="lede" style="margin-top:16px">Megan owns the audit (8.3k). Remaining 28 need request timestamps. Do not treat the 10 stale flags as a funding queue.</p>
+</section>
+
+<section class="slide" data-sec="Operations" data-label="Payment type">
+  <p class="kicker">Operations</p>
+  <h2>Auto-invoice cannot fire. Coverage is 14%.</h2>
+  <p class="lede">75 of 532 ACTIVE jobs have a payment type. 457 unknown. 217 already-started installs are this sprint. Do not guess LightReach vs cash.</p>
+  <div class="grid g3" style="margin-top:16px">
+    <div class="card"><div class="stat-l">ACTIVE with type</div><div class="stat-v fr">75</div><div class="muted">14%</div></div>
+    <div class="card"><div class="stat-l">ACTIVE unknown</div><div class="stat-v dis">457</div></div>
+    <div class="card"><div class="stat-l">Install-started unknown</div><div class="stat-v gold">217</div><div class="muted">this sprint</div></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Operations" data-label="Closeouts">
+  <p class="kicker">Closeouts</p>
+  <h2>24 completed cash/loan jobs never billed. ~$950k.</h2>
+  <p class="lede">Frank Shen is the teaching case: $1,000 invoiced, $104k sitting off books.</p>
+  <table style="margin-top:12px">
+    <tr><th>Job</th><th>Customer</th><th>Unpaid</th><th>Invoiced</th><th>Note</th></tr>
+    <tr><td class="mono">P-005107</td><td>Frank Shen</td><td>$104,405</td><td>$1,000</td><td class="muted">Cash · Alex · inspection passed</td></tr>
+    <tr><td class="mono">P-003863</td><td>Rosanna Coveyou</td><td>$99,868</td><td>$0</td><td class="muted">Loan · Mike · inspection passed</td></tr>
+    <tr><td class="mono">P-005802</td><td>Anthony La</td><td>$78,993</td><td>$0</td><td class="muted">Loan · Andrea · COMPLETE + PTO</td></tr>
+    <tr><td class="mono">P-004698</td><td>John Navidi</td><td>$72,086</td><td>$0</td><td class="muted">Cash · Andrea · COMPLETE + PTO</td></tr>
+    <tr><td class="mono">P-004984</td><td>Paul Pimlett</td><td>$64,474</td><td>$0</td><td class="muted">Loan · Andrea · COMPLETE + PTO</td></tr>
+    <tr><td class="mono">P-004616</td><td>St. Clement’s</td><td>$56,810</td><td>$0</td><td class="muted">Cash · Andrea · COMPLETE + PTO</td></tr>
+    <tr><td class="mono">P-006150</td><td>Stephen</td><td>$50,600</td><td>$0</td><td class="muted">Cash · Alex · COMPLETE + PTO</td></tr>
+  </table>
+</section>
+
+<section class="slide" data-sec="Operations" data-label="COMPLETE">
+  <p class="kicker">Status</p>
+  <h2>503 jobs marked COMPLETED with no work evidence.</h2>
+  <p class="lede">Gate 8.6a on real milestones: requires installCompleted + inspectionPassed. COMPLETE in Nexus is not billable truth.</p>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><div class="stat-l">Junk COMPLETED</div><div class="stat-v dis">503</div></div>
+    <div class="card"><div class="stat-l">QBO payment-link failures</div><div class="stat-v gold">Broken</div><div class="muted">Tyler, 25 Aug. Need 3 straight days at zero.</div></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Operations" data-label="Nexus logins">
+  <p class="kicker">Nexus</p>
+  <h2>Accounting is not in the system.</h2>
+  <table style="margin-top:12px">
+    <tr><th>Person</th><th>Role</th><th>Last Nexus login</th></tr>
+    <tr><td>Mario Rodriguez</td><td>Accounting / AP</td><td class="dis">Never</td></tr>
+    <tr><td>Misty Loyet</td><td>Accounting</td><td class="dis">Never</td></tr>
+    <tr><td>Brooke Blyleven</td><td>Accounting / AR</td><td>2 Mar 2026</td></tr>
+    <tr><td>Makena Oakes</td><td>TPO & Loan Funding</td><td>No recorded login</td></tr>
+    <tr><td>Megan Torres</td><td>Admin / AR / Funding</td><td>Owns Wheelhouse; login stamp missing</td></tr>
+    <tr><td>Ashton Curcie</td><td>Admin</td><td>29 Jul 2026</td></tr>
+  </table>
+</section>
+
+<section class="slide" data-sec="Operations" data-label="Owners">
+  <p class="kicker">Ownership</p>
+  <h2>82 AR jobs have no PM. $2.00M.</h2>
+  <div class="card" style="margin-top:16px">
+    <div class="row"><span>Unassigned · 82 jobs</span><b>$2.00M</b></div><div class="bar"><i style="width:100%;background:var(--dispute)"></i></div>
+    <div class="row"><span>Andrea Ortiz · 18</span><b>$393k</b></div><div class="bar"><i style="width:20%"></i></div>
+    <div class="row"><span>Alex Garcia · 20</span><b>$391k</b></div><div class="bar"><i style="width:20%"></i></div>
+    <div class="row"><span>Austin Fietsam · 17</span><b>$219k</b></div><div class="bar"><i style="width:11%"></i></div>
+    <div class="row"><span>Mike Gomez · 11</span><b>$135k</b></div><div class="bar"><i style="width:7%"></i></div>
+  </div>
+  <p class="muted" style="margin-top:12px">Field → PM. Funding → Makena. Cash AR → Mario.</p>
+</section>
+
+<section class="slide" data-sec="Asks" data-label="Scorecard">
+  <p class="kicker">Scorecard</p>
+  <h2>F1–F16. Friday 3pm.</h2>
+  <table style="margin-top:8px;font-size:13px">
+    <tr><th>ID</th><th>KPI</th><th>Baseline</th><th>Target</th><th>Owner</th></tr>
+    <tr><td class="mono">F1</td><td>Total QBO AR</td><td>$3.14M / 149</td><td>Report only</td><td>Megan</td></tr>
+    <tr><td class="mono">F2</td><td>Collectible AR</td><td>$237k / 17</td><td><$150k in 30 days</td><td>Megan + Mario</td></tr>
+    <tr><td class="mono">F3</td><td>Funding AR</td><td>$2.49M / 108</td><td>90+ funding <$200k in 45d</td><td>Megan / Makena</td></tr>
+    <tr><td class="mono">F4</td><td>Disputed AR</td><td>$171k / 4</td><td>Written path in 7 days</td><td>Megan + PM</td></tr>
+    <tr><td class="mono">F5</td><td>Collectible 90+</td><td>$129k · 54% of F2</td><td><15% of F2 in 30 days</td><td>Mario</td></tr>
+    <tr><td class="mono">F8</td><td>Payment-type coverage</td><td>14% of ACTIVE</td><td>80% in 30 days</td><td>Sales Support</td></tr>
+    <tr><td class="mono">F9</td><td>Unbilled closeouts</td><td>$950k / 24</td><td>100% invoiced or excepted in 14d</td><td>Mario</td></tr>
+    <tr><td class="mono">F12</td><td>Wheelhouse unfunded</td><td>28 true / 10 lies</td><td>Nexus = portal 100%</td><td>Megan</td></tr>
+    <tr><td class="mono">F14</td><td>Accounting in Nexus</td><td>Mario never · Brooke Mar 2</td><td>Every business day</td><td>Mario / Megan</td></tr>
+    <tr><td class="mono">F16</td><td>Friday scorecard</td><td>Not operating cadence</td><td>3pm to Vinnie, Ashton, Melissa, Jesse</td><td>Megan</td></tr>
+  </table>
+</section>
+
+<section class="slide" data-sec="Asks" data-label="CTAs">
+  <p class="kicker">Calls to action</p>
+  <h2>Twelve moves. Owners and due dates.</h2>
+  <table style="margin-top:8px;font-size:13px">
+    <tr><th>#</th><th>Action</th><th>Owner</th><th>Due</th><th>Dollars</th></tr>
+    <tr><td class="mono">1</td><td>Collect cash ≥90 days</td><td>Mario / Megan</td><td>Fri 29 Aug</td><td>$129k / 6</td></tr>
+    <tr><td class="mono">2</td><td>Contact cash ≥30 days</td><td>Mario</td><td>Fri 29 Aug</td><td>$74k / 8</td></tr>
+    <tr><td class="mono">3</td><td>Written path on 4 disputes</td><td>Megan / Vinnie / Andrea</td><td>Wed 27 Aug</td><td>$171k</td></tr>
+    <tr><td class="mono">4</td><td>Tag unlabeled new invoices</td><td>Mario</td><td>Wed 27 Aug</td><td>$245k / 20</td></tr>
+    <tr><td class="mono">5</td><td>Funding 90+ punch list</td><td>Megan / Makena / Inspection</td><td>Thu 28 Aug</td><td>$432k / 26</td></tr>
+    <tr><td class="mono">6</td><td>Finish Wheelhouse audit</td><td>Megan / 8.3k</td><td>Wed 27 Aug</td><td>28 true-unfunded</td></tr>
+    <tr><td class="mono">7</td><td>Payment type on install-started jobs</td><td>Sales Support / Megan</td><td>50 / week</td><td>217 this sprint</td></tr>
+    <tr><td class="mono">8</td><td>Bill completed cash/loan closeouts</td><td>Mario / Megan</td><td>50% 29 Aug / rest 5 Sep</td><td>$950k / 24</td></tr>
+    <tr><td class="mono">9</td><td>Owner on AR with no PM</td><td>Megan</td><td>Thu 28 Aug</td><td>82 jobs / $2.00M</td></tr>
+    <tr><td class="mono">10</td><td>Friday 3pm scorecard</td><td>Megan</td><td>Every Friday</td><td>F1–F16</td></tr>
+    <tr><td class="mono">11</td><td>Unblock QBO payment links + 8.6b</td><td>Mario / Megan / Tyler</td><td>Daily</td><td>Process</td></tr>
+    <tr><td class="mono">12</td><td>Gate 8.6a on real milestones</td><td>Megan / Melissa</td><td>Fri 29 Aug</td><td>503 junk COMPLETED</td></tr>
+  </table>
+</section>
+
+<section class="slide" data-sec="Asks" data-label="Roles">
+  <p class="kicker">Roles</p>
+  <h2>Who does what. Who does not.</h2>
+  <table style="margin-top:12px">
+    <tr><th>Role</th><th>Does</th><th>Does not</th></tr>
+    <tr><td>Accounting</td><td>Invoice and collect on completed milestones. 8.6a / 8.6b.</td><td class="muted">PM, photo returns, SPAN arguments.</td></tr>
+    <tr><td>Megan</td><td>Scorecard, Wheelhouse, escalated collections, dispute path.</td><td class="muted">Field photos.</td></tr>
+    <tr><td>Makena</td><td>TPO portal submission (M1/M2/M3).</td><td class="muted">Homeowner dunning.</td></tr>
+    <tr><td>Sales Support</td><td>Payment method (8.3i), schedule (8.3j), loan funded (8.3k).</td><td class="muted">Creating invoices.</td></tr>
+    <tr><td>PMs</td><td>Disputes, field corrections, financeStatus updates.</td><td class="muted">Invoice math.</td></tr>
+    <tr><td>Inspection Mgr</td><td>TPO return visits for photo / BUS / commissioning.</td><td class="muted">Funding requests.</td></tr>
+  </table>
+</section>
+
+<section class="slide" data-sec="Asks" data-label="Decisions">
+  <p class="kicker">This room</p>
+  <h2>Six decisions before we leave.</h2>
+  <div class="grid" style="margin-top:16px">
+    <div class="card"><b>Authorize demand on Prior ($73k) this week</b><div class="muted">Need: Yes / wait / legal</div></div>
+    <div class="card"><b>Written path on Oh, Davis, Hoch, Donley</b><div class="muted">Need: Collect / credit / legal / wait-on-work</div></div>
+    <div class="card"><b>Jake: Stotz split-contract resign or walk from LR</b><div class="muted">Need: Date or demand</div></div>
+    <div class="card"><b>Park TSR (Bennett $192k, Peters $134k) until Tesla remittance is confirmed</b><div class="muted">Need: Confirm</div></div>
+    <div class="card"><b>Make Friday scorecard the operating meeting</b><div class="muted">Need: Adopt F1–F16</div></div>
+    <div class="card"><b>Mario and Megan in Nexus every business day</b><div class="muted">Need: Non-negotiable</div></div>
+  </div>
+</section>
+
+<section class="slide" data-sec="Asks" data-label="Appendix">
+  <p class="kicker">Appendix</p>
+  <h2>Workbooks. Same numbers as this deck.</h2>
+  <p class="lede">Source: Nexus Firestore + QuickBooks invoice.balance, 26 August 2026. Never cite Nexus Billing Management $111.7M.</p>
+  <div class="grid g2" style="margin-top:16px">
+    <a class="card" href="https://docs.google.com/spreadsheets/d/1Y3RB-s6_k5iCSoTW8cvHl1q_QyQSmbx2/edit" target="_blank" rel="noreferrer" style="color:inherit;text-decoration:none">
+      <div class="kicker">Google Sheets</div>
+      <b>Finance KPIs and CTAs</b>
+      <p class="muted">F1–F16, twelve actions, owners, due dates.</p>
+    </a>
+    <a class="card" href="https://docs.google.com/spreadsheets/d/1mMcO0d3U6Z0szOAUERLkcgZttx3_xOSf/edit" target="_blank" rel="noreferrer" style="color:inherit;text-decoration:none">
+      <div class="kicker">Google Sheets</div>
+      <b>Outstanding balance review</b>
+      <p class="muted">Job-level AR, ready-to-bill, unknown payment type, unbilled closeouts.</p>
+    </a>
+  </div>
+</section>
+
+  </div>
+  <footer class="bar">
+    <a class="btn btn-ghost" id="back" href="#1">← Back</a>
+    <div class="progress"><i id="bar"></i></div>
+    <span class="muted" id="lab">Title</span>
+    <a class="btn btn-gold" id="next" href="#2">Next →</a>
+  </footer>
+</div>
+<script>
+(function(){
+  var slides = [].slice.call(document.querySelectorAll('.slide'));
+  var n = slides.length;
+  var secs = [];
+  slides.forEach(function(s,i){
+    var name = s.getAttribute('data-sec');
+    if (secs.indexOf(name) < 0) secs.push(name);
+  });
+  var nav = document.getElementById('secs');
+  secs.forEach(function(name){
+    var idx = slides.findIndex(function(s){ return s.getAttribute('data-sec')===name; });
+    var a = document.createElement('a');
+    a.className = 'pill';
+    a.textContent = name;
+    a.href = '#'+(idx+1);
+    a.dataset.sec = name;
+    nav.appendChild(a);
+  });
+  function cur(){
+    var h = parseInt((location.hash||'#1').slice(1),10);
+    if (!h || h<1) return 1;
+    if (h>n) return n;
+    return h;
+  }
+  function render(){
+    var i = cur();
+    slides.forEach(function(s,idx){ s.classList.toggle('on', idx===i-1); });
+    var s = slides[i-1];
+    document.getElementById('pos').textContent = s.getAttribute('data-sec')+' · '+i+' / '+n;
+    document.getElementById('lab').textContent = s.getAttribute('data-label');
+    document.getElementById('bar').style.width = ((i)/n*100)+'%';
+    document.getElementById('back').href = '#'+Math.max(1,i-1);
+    document.getElementById('next').href = '#'+Math.min(n,i+1);
+    document.getElementById('next').style.opacity = i===n ? .4 : 1;
+    [].forEach.call(nav.querySelectorAll('.pill'), function(p){
+      p.classList.toggle('on', p.dataset.sec === s.getAttribute('data-sec'));
+    });
+    document.getElementById('stage').scrollTop = 0;
+  }
+  window.addEventListener('hashchange', render);
+  window.addEventListener('keydown', function(e){
+    if (e.target && (e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')) return;
+    var i = cur();
+    if (e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){ e.preventDefault(); location.hash = '#'+Math.min(n,i+1); }
+    if (e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); location.hash = '#'+Math.max(1,i-1); }
+    if (e.key==='Home'){ e.preventDefault(); location.hash = '#1'; }
+    if (e.key==='End'){ e.preventDefault(); location.hash = '#'+n; }
+  });
+  if (!location.hash) location.hash = '#1';
+  render();
+})();
+</script>
+</body>
+</html>
